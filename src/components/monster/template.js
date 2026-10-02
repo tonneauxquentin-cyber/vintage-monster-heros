@@ -14,7 +14,7 @@ export default function getTemplate(monster) {
                 </select>
             </td>
             <td class="p-3 whitespace-nowrap">
-                <span class="monster-danger isEditing-hidden">${monster.dangerLevel}</span>
+                <span class="monster-danger isEditing-hidden" title="Danger level ${monster.dangerLevel}">${monster.skulls}</span>
                 <input type="number" min="1" max="5" class="input-danger isEditing-visible field" value="${monster.dangerLevel}" />
             </td>
             <td class="p-3">

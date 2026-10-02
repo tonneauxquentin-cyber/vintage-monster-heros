@@ -8,6 +8,9 @@ export default class Monster {
         this.year = data.year;
         this.domElt = null;
     }
+    get skulls() {
+        return "☠️".repeat(this.dangerLevel);
+    }
     render() {
         const template = document.createElement("template");
         template.innerHTML = getTemplate(this);
@@ -41,7 +44,8 @@ export default class Monster {
         this.year = data.year;
         this.domElt.querySelector(".monster-name").innerText = this.name;
         this.domElt.querySelector(".monster-type").innerText = this.type;
-        this.domElt.querySelector(".monster-danger").innerText = this.dangerLevel;
+        this.domElt.querySelector(".monster-danger").innerText = this.skulls;
+        this.domElt.querySelector(".monster-danger").title = "Danger level " + this.dangerLevel;
         this.domElt.querySelector(".monster-year").innerText = this.year;
         this.domElt.classList.remove("isEditing");
         this.dispatch("monster:updated", { monster: this });

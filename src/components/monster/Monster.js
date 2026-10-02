@@ -12,6 +12,15 @@ export default class Monster {
         const template = document.createElement("template");
         template.innerHTML = getTemplate(this);
         this.domElt = template.content.firstElementChild;
+        this.initEvents();
         return this.domElt;
+    }
+    dispatch(type, detail) {
+        this.domElt.dispatchEvent(new CustomEvent(type, { bubbles: true, detail }));
+    }
+    initEvents() {
+        this.domElt.querySelector(".btn-delete").addEventListener("click", () => {
+            this.dispatch("monster:deleted", { id: this.id });
+        });
     }
 }

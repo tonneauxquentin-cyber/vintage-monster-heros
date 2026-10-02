@@ -62,5 +62,21 @@ export default class MonsterList {
             dangerLevel.value = "";
             year.value = "";
         });
+        this.listDomElt.addEventListener("monster:deleted", async (e) => {
+            await this.deleteOneById(e.detail.id);
+        });
+    }
+    async deleteOneById(id) {
+        // 1. Supprimer dans l'API
+        await DB.deleteOneById(id);
+        // 2. Supprimer dans le tableau
+        this.monsters.splice(
+            this.monsters.findIndex((monster) => monster.id == id),
+            1
+        );
+        // 3. Supprimer dans le DOM
+        this.domElt.querySelector(`[data-id='${id}']`).remove();
+        // 4. Mettre à jour le compteur
+        this.renderMonstersCount();
     }
 }

@@ -1,3 +1,4 @@
+// HTML d'une créature (une ligne <tr>). Les classes isEditing-* viennent du gabarit.
 export default function getTemplate(monster) {
     const types = ["Giant reptile", "Alien", "Mutant", "Giant insect", "Robot", "Deep-sea creature"];
 

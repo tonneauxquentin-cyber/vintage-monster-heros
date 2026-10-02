@@ -6,12 +6,12 @@ export default function getTemplate(monsterList) {
 
           <label class="block mb-4 text-[var(--silver)]">
             Name
-            <input type="text" class="field" placeholder="The Crawling Mass" />
+            <input type="text" class="new-name field" placeholder="The Crawling Mass" />
           </label>
 
           <label class="block mb-4 text-[var(--silver)]">
             Type
-            <select class="field">
+            <select class="new-type field">
               <option>Giant reptile</option>
               <option>Alien</option>
               <option>Mutant</option>
@@ -23,15 +23,15 @@ export default function getTemplate(monsterList) {
 
           <label class="block mb-4 text-[var(--silver)]">
             Danger level (1 to 5)
-            <input type="number" min="1" max="5" class="field" placeholder="3" />
+            <input type="number" min="1" max="5" class="new-danger field" placeholder="3" />
           </label>
 
           <label class="block mb-6 text-[var(--silver)]">
             Release year
-            <input type="number" min="1950" max="1969" class="field" placeholder="1957" />
+            <input type="number" min="1950" max="1969" class="new-year field" placeholder="1957" />
           </label>
 
-          <button class="btn btn-lipstick w-full py-3 px-4 text-lg">Add to the archive</button>
+          <button class="btn-add btn btn-lipstick w-full py-3 px-4 text-lg">Add to the archive</button>
         </aside>
 
         <!-- Section droite pour la liste des créatures -->

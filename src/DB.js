@@ -20,4 +20,17 @@ export default class DB {
         });
         return response.json();
     }
+    static async updateOne(monster) {
+        const response = await fetch(this.apiURL + "/creatures/" + monster.id, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: monster.name,
+                type: monster.type,
+                dangerLevel: monster.dangerLevel,
+                year: monster.year,
+            }),
+        });
+        return response.json();
+    }
 }

@@ -65,6 +65,9 @@ export default class MonsterList {
         this.listDomElt.addEventListener("monster:deleted", async (e) => {
             await this.deleteOneById(e.detail.id);
         });
+        this.listDomElt.addEventListener("monster:updated", async (e) => {
+            await this.updateOne(e.detail.monster);
+        });
     }
     async deleteOneById(id) {
         // 1. Supprimer dans l'API
@@ -78,5 +81,8 @@ export default class MonsterList {
         this.domElt.querySelector(`[data-id='${id}']`).remove();
         // 4. Mettre à jour le compteur
         this.renderMonstersCount();
+    }
+    async updateOne(monster) {
+        return await DB.updateOne(monster);
     }
 }

@@ -22,5 +22,28 @@ export default class Monster {
         this.domElt.querySelector(".btn-delete").addEventListener("click", () => {
             this.dispatch("monster:deleted", { id: this.id });
         });
+        this.domElt.querySelector(".btn-edit").addEventListener("click", () => {
+            this.domElt.classList.add("isEditing");
+        });
+        this.domElt.querySelector(".btn-check").addEventListener("click", () => {
+            this.update({
+                name: this.domElt.querySelector(".input-name").value,
+                type: this.domElt.querySelector(".input-type").value,
+                dangerLevel: Number(this.domElt.querySelector(".input-danger").value),
+                year: Number(this.domElt.querySelector(".input-year").value),
+            });
+        });
+    }
+    update(data) {
+        this.name = data.name;
+        this.type = data.type;
+        this.dangerLevel = data.dangerLevel;
+        this.year = data.year;
+        this.domElt.querySelector(".monster-name").innerText = this.name;
+        this.domElt.querySelector(".monster-type").innerText = this.type;
+        this.domElt.querySelector(".monster-danger").innerText = this.dangerLevel;
+        this.domElt.querySelector(".monster-year").innerText = this.year;
+        this.domElt.classList.remove("isEditing");
+        this.dispatch("monster:updated", { monster: this });
     }
 }

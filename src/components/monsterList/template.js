@@ -40,7 +40,7 @@ export default function getTemplate(monsterList) {
             <h2 class="display text-2xl">The archive</h2>
             <p class="text-[var(--silver)]">
               Creatures on file :
-              <span class="display text-2xl text-[var(--gold)]">xxx</span>
+              <span class="monster-count display text-2xl text-[var(--gold)]">xxx</span>
             </p>
           </div>
 

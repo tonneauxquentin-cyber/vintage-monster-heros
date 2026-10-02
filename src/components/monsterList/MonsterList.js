@@ -7,6 +7,7 @@ export default class MonsterList {
         DB.setApiURL(data.apiURL);
         this.domElt = document.querySelector(data.el);
         this.monsters = [];
+        this.search = "";
     }
     async loadMonsters() {
         const monsters = await DB.findAll();
@@ -21,7 +22,8 @@ export default class MonsterList {
         this.initEvents();
     }
     renderMonsters() {
-        this.monsters.forEach((monster) => this.listDomElt.append(monster.render()));
+        this.listDomElt.innerHTML = "";
+        this.getVisibleMonsters().forEach((monster) => this.listDomElt.append(monster.render()));
     }
     getMonstersCount() {
         return this.monsters.length;
@@ -40,8 +42,8 @@ export default class MonsterList {
         const created = await DB.store(data);
         // 2. Ajouter dans le tableau
         this.storeInArray(created);
-        // 3. Ajouter dans le DOM (le dernier élément du tableau est le nouveau)
-        this.storeInDOM(this.monsters[this.monsters.length - 1]);
+        // 3. Réafficher la liste (respecte le filtre)
+        this.renderMonsters();
         // 4. Mettre à jour le compteur
         this.renderMonstersCount();
     }
@@ -68,6 +70,10 @@ export default class MonsterList {
         this.listDomElt.addEventListener("monster:updated", async (e) => {
             await this.updateOne(e.detail.monster);
         });
+        this.domElt.querySelector(".search").addEventListener("input", (e) => {
+            this.search = e.target.value;
+            this.renderMonsters();
+        });
     }
     async deleteOneById(id) {
         // 1. Supprimer dans l'API
@@ -84,5 +90,13 @@ export default class MonsterList {
     }
     async updateOne(monster) {
         return await DB.updateOne(monster);
+    }
+    getVisibleMonsters() {
+        const search = this.search.toLowerCase();
+        return this.monsters.filter(
+            (monster) =>
+                monster.name.toLowerCase().includes(search) ||
+                monster.type.toLowerCase().includes(search)
+        );
     }
 }
